@@ -102,8 +102,16 @@ class Game {
         do {
           $typedName = readline("Digite o nome de um país para atacar ou deixe em branco para não atacar ninguém:\n");
           $defendingCountryName = trim($typedName);
-        }
-        while ($defendingCountryName && !isset($neighbors[$defendingCountryName]));
+          $isNeighbor = FALSE;
+          
+          //verifies if country is neighbor
+          foreach($neighbors as $neighbor){
+            if($neighbor->getName() === $defendingCountryName){
+              $isNeighbor = TRUE;
+            }
+          }
+          
+        } while ($defendingCountryName && !$isNeighbor);
 
         if ($defendingCountryName) {
           $defendingCountry = $this->countries[$defendingCountryName];
@@ -131,6 +139,12 @@ class Game {
         }
       }
       sleep(1);
+    }
+
+    //add 3 troops plus one for each conquered country for each round
+    $countries = $this->getUnconqueredCountries();
+    foreach($countries as $country){
+      $country->addTroops(3 + $country->getNumberOfConqueredCountries());
     }
   }
 
