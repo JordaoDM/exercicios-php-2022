@@ -99,17 +99,13 @@ class BaseCountry implements CountryInterface {
     return $this->neighbors;
   }
 
-  public function isConquered(): bool{
-    return $this->conquered;
-  }
-
   /**
-   * Get conquered.
+   * Is conquered.
    *
    * @return $this->conquered.
    *   Returns a bool value true if the country is conquered.
    */
-  public function getConquered(): bool {
+  public function isConquered(): bool{
     return $this->conquered;
   }
 
@@ -173,7 +169,6 @@ class BaseCountry implements CountryInterface {
    */
   public function conquer(CountryInterface $conqueredCountry): void {
     $conqueredNeighbors = $conqueredCountry->getNeighbors();
-    $validNeighbors = [];
     
     foreach($conqueredNeighbors as $conqueredNeighbor){
       if((!in_array($conqueredNeighbor, $this->neighbors)) and ($this->name != $conqueredNeighbor->getName())){

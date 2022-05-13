@@ -23,7 +23,7 @@ class ComputerPlayerCountry extends BaseCountry {
 
     //selects only the countries that have the same number of troops or less
     foreach($this->neighbors as $neighbor){
-      if(($this->getNumberOfTroops() >= $neighbor->getNumberOfTroops()) and ($neighbor->getConquered() == FALSE)){
+      if(($this->getNumberOfTroops() >= $neighbor->getNumberOfTroops()) and ($neighbor->isConquered() == FALSE)){
         array_push($weakNeighbors, $neighbor);
       }
     }
